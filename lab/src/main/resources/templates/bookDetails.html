@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f8f8;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #4285f4;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h1, h2 {
+            color: #4285f4;
+        }
+
+        section {
+            margin: 0 auto;
+            max-width: 600px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1 th:text="${bookDetail.get().getTitle()}" style="color: white"></h1>
+</header>
+<section>
+    <h2 th:text=" 'Genre: ' + ${bookDetail.get().getGenre()}"></h2>
+    <h2 th:text=" 'Year: ' + ${bookDetail.get().getYear()}"></h2>
+    <h2>Authors:</h2>
+    <ul th:each="author : ${bookDetail.get().getAuthors()}">
+        <li th:text="${author.getName()} + ' ' + ${author.getSurname()}"></li>
+    </ul>
+</section>
+</body>
+</html>

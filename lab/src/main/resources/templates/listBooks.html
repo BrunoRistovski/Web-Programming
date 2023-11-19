@@ -1,0 +1,95 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Books Homepage - Welcome to My Book Store</title>
+    <style>
+
+    body {
+        width: 800px;
+        margin: auto;
+        font-family: 'Arial', sans-serif;
+        background-color: #f9f9f9;
+        color: #333;
+        line-height: 1.6;
+    }
+
+    header {
+        background-color: #4285f4;
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+    }
+
+    main {
+        margin-top: 20px;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    }
+
+    h1, h2 {
+        color: #4285f4;
+    }
+
+    form {
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    input[type="radio"] {
+        margin-right: 5px;
+    }
+
+    input[type="submit"] {
+        background-color: #4285f4;
+        color: #fff;
+        padding: 10px 20px;
+        cursor: pointer;
+        border: none;
+        border-radius: 4px;
+    }
+
+    div[th\:if] {
+        margin-top: 20px;
+        border-top: 1px solid #ddd;
+        padding-top: 20px;
+    }
+    </style>
+</head>
+<body>
+<header>
+    <h1 style="color: white">Welcome to My Book Store</h1>
+</header>
+<main>
+    <h2>Choose book:</h2>
+    <form method="post" action="/author">
+        <div th:each="book : ${books}">
+            <label th:for="${book.getIsbn()}">
+                <input type="radio" th:id="${book.getIsbn()}" name="book" th:value="${book.getIsbn()}">
+                <span th:text="'Title: '+${book.getTitle()}+' Genre: '+${book.getGenre()}+' Year: '+${book.getYear()}"></span>
+            </label>
+        </div>
+        <input type='submit' value='Submit'>
+    </form>
+    <h2>Choose By Genre</h2>
+    <form method="post" action="/listBooks">
+        <div th:each=" zarn : ${books}">
+            <label th:for="${zarn.getGenre()}">
+                <input type="radio" name="genre" th:id="${zarn.getGenre()}" th:value="${zarn.getGenre()}">
+                <span th:text="${zarn.getGenre()}"></span>
+            </label>
+        </div>
+        <input type="submit" value="Genre">
+    </form>
+    <div th:if="${genreBooks}">
+        <h2>The Books are</h2>
+        <span th:text="${genreBooks.get().getTitle()}"></span>
+    </div>
+</main>
+</body>
+</html>
